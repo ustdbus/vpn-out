@@ -1,10 +1,10 @@
 {
-  "id": "288f6e5e-e84d-426a-a5dc-3dd3e2916f31",
-  "token": "c98eb928-c2f3-4827-9448-2c2c885edcb2",
-  "private_key": "mOA+EXaCK1DaTteyyBgfh9WuFFdzdhvcCxcm6Pve2Hk=",
-  "public_key": "Ue8RHhYT5LCNxnFO3KjamdjyJKzvMVrAQmZKclVFbmg=",
+  "id": "773c50d2-db86-47e2-b57b-91eb668be633",
+  "token": "4ca0a0ae-bdca-4222-9cc7-cf333e25ced0",
+  "private_key": "AI0d7hIBPuFbMohvzISp6cbL54y0xZdu4B0iXKRj43Q=",
+  "public_key": "kHdzQI5QcOVvSVpnaqgwWFYIO8XNx+yTRs/U9tpKf3g=",
   "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
   "ipv4": "172.16.0.2",
-  "ipv6": "2606:4700:110:82b5:b172:ccbc:86c0:474f",
+  "ipv6": "2606:4700:110:8df8:cf66:1e04:b6fd:8d45",
   "account_type": "free"
 }
