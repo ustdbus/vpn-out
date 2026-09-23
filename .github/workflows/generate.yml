@@ -38,16 +38,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: 准备 WARP 注册工具 (若需要)
-        if: ${{ !inputs.vpn_type || inputs.vpn_type == 'all' || inputs.vpn_type == 'warp' }}
+      - name: 安装依赖
         run: |
-          set -euo pipefail
-          VER=$(curl -sL https://api.github.com/repos/Diniboy1123/usque/releases/latest | jq -r '.tag_name' | sed 's/^v//')
-          echo "下载 usque v$VER"
-          curl -sL -o usque.zip "https://github.com/Diniboy1123/usque/releases/download/v${VER}/usque_${VER}_linux_amd64.zip"
-          unzip -oq usque.zip && chmod +x usque
-          ./usque register -a -n "vpn-out-actions"
-          test -s config.json
+          python3 -m pip install --upgrade pip
+          pip install cryptography
 
       - name: 执行自动化注册与订阅提取
         env:
@@ -105,9 +99,11 @@ jobs:
             echo "### 📦 在线订阅直链 (可直接复制到 sout 面板订阅源中):"
             echo "- **单行代理节点聚合列表 (sout 推荐)**: \`https://raw.githubusercontent.com/${REPO}/sub/all-proxies.txt\`"
             echo "- **Mihomo / Clash 聚合订阅**: \`https://raw.githubusercontent.com/${REPO}/sub/clash-subscription.yaml\`"
+            echo "- **WARP WireGuard 节点单行链接**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-links.txt\`"
+            echo "- **WARP sing-box 出站配置**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-wireguard.json\`"
+            echo "- **WARP 客户端配置 (.conf)**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-wireguard.conf\`"
             echo "- **Windscribe 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/windscribe-links.txt\`"
             echo "- **Opera 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/opera-links.txt\`"
-            echo "- **WARP MASQUE 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-masque-links.txt\`"
             echo ""
             echo "### 📄 提取产物文件列表:"
             if [ -d dist ]; then

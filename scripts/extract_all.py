@@ -4,22 +4,23 @@ VPN 订阅与节点全量自动化提取器
 一键调用各个 VPN 提取模块，并将所有提取出的节点聚合导出：
 
 产物列表：
-1. all-proxies.txt: 聚合所有 VPN 节点的单行通用代理链接（sout 面板可直接一键全量导入）
+1. all-proxies.txt: 聚合所有 VPN 节点的单行通用代理链接（包含 WireGuard / SOCKS5 / HTTP）
 2. clash-subscription.yaml: 聚合的完整 mihomo / Clash 订阅配置（包含各 VPN 策略组）
 3. 单独提取文件：
-   - warp-masque.yaml / warp-masque-links.txt
+   - warp-wireguard.json / warp-wireguard.conf / warp-links.txt
    - windscribe.yaml / windscribe-links.txt
    - opera.yaml / opera-links.txt
 """
 import argparse
 import asyncio
+import json
 import os
 import sys
 
 if sys.platform == "win32":
     try:
-        sys.stdout.reconfigure(encoding='utf-8')
-        sys.stderr.reconfigure(encoding='utf-8')
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
     except Exception:
         pass
 
@@ -30,10 +31,9 @@ from extract_proton import extract_proton_async
 
 
 def build_aggregated_clash(outdir: str):
-    """读取所有提取出的 yaml，合成一个全量订阅"""
+    """读取所有提取出的 yaml/json，合成一个全量订阅"""
     proxies_lines = []
     proxy_names = []
-    group_defs = []
 
     # 1. 尝试读 Windscribe
     ws_yaml = os.path.join(outdir, "windscribe.yaml")
@@ -45,8 +45,7 @@ def build_aggregated_clash(outdir: str):
                 proxies_lines.append(p_part.strip())
                 for line in p_part.strip().splitlines():
                     if "name:" in line:
-                        # 提取名字
-                        n = line.split("name:")[1].split(",")[0].strip().strip('"\'')
+                        n = line.split("name:")[1].split(",")[0].strip().strip("\"'")
                         proxy_names.append(n)
 
     # 2. 尝试读 Opera
@@ -59,21 +58,46 @@ def build_aggregated_clash(outdir: str):
                 proxies_lines.append(p_part.strip())
                 for line in p_part.strip().splitlines():
                     if "name:" in line:
-                        n = line.split("name:")[1].split(",")[0].strip().strip('"\'')
+                        n = line.split("name:")[1].split(",")[0].strip().strip("\"'")
                         proxy_names.append(n)
 
-    # 3. 尝试读 WARP
-    warp_yaml = os.path.join(outdir, "warp-masque.yaml")
-    if os.path.exists(warp_yaml):
-        with open(warp_yaml, "r", encoding="utf-8") as f:
-            content = f.read()
-            if "proxies:" in content:
-                p_part = content.split("proxies:")[1].split("proxy-groups:")[0]
-                proxies_lines.append(p_part.strip())
-                for line in p_part.strip().splitlines():
-                    if "name:" in line:
-                        n = line.split("name:")[1].split(",")[0].strip().strip('"\'')
-                        proxy_names.append(n)
+    # 3. 尝试读 WARP WireGuard 出站并转换为 Clash / Mihomo 格式
+    warp_json = os.path.join(outdir, "warp-wireguard.json")
+    if os.path.exists(warp_json):
+        try:
+            with open(warp_json, "r", encoding="utf-8") as f:
+                wcfg = json.load(f)
+            v4 = ""
+            v6 = ""
+            for addr in wcfg.get("local_address", []):
+                ip_part = addr.split("/")[0]
+                if ":" in ip_part:
+                    v6 = ip_part
+                else:
+                    v4 = ip_part
+            priv = wcfg.get("private_key", "")
+            pub = wcfg.get("peer_public_key", "")
+            srv = wcfg.get("server", "engage.cloudflareclient.com")
+            port = wcfg.get("server_port", 2408)
+            name = "WARP-WireGuard"
+
+            clash_wg = f"""  - name: {name}
+    type: wireguard
+    server: {srv}
+    port: {port}
+    ip: {v4}
+    ipv6: {v6}
+    public-key: {pub}
+    private-key: {priv}
+    udp: true
+    remote-dns-resolve: true
+    dns: [1.1.1.1, 2606:4700:4700::1111]
+    mtu: 1280
+    reserved: [0, 0, 0]"""
+            proxies_lines.append(clash_wg)
+            proxy_names.append(name)
+        except Exception as e:
+            print(f"[WARP Clash 转换] 忽略错误: {e}", file=sys.stderr)
 
     if not proxies_lines:
         return
@@ -101,7 +125,8 @@ log-level: info
 ipv6: true
 
 proxies:
-""" + "\n".join(proxies_lines),
+"""
+        + "\n".join(proxies_lines),
         f"""
 proxy-groups:
   - name: 🚀 节点选择
@@ -114,32 +139,40 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-{ind(proxy_names)}"""
+{ind(proxy_names)}""",
     ]
 
     if ws_names:
-        sections.append(f"""  - name: 🛡️ Windscribe节点
+        sections.append(
+            f"""  - name: 🛡️ Windscribe节点
     type: select
     proxies:
-{ind(ws_names)}""")
+{ind(ws_names)}"""
+        )
 
     if op_names:
-        sections.append(f"""  - name: 🎭 Opera节点
+        sections.append(
+            f"""  - name: 🎭 Opera节点
     type: select
     proxies:
-{ind(op_names)}""")
+{ind(op_names)}"""
+        )
 
     if warp_names:
-        sections.append(f"""  - name: ⚡ WARP直连
+        sections.append(
+            f"""  - name: ⚡ WARP直连
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-{ind(warp_names)}""")
+{ind(warp_names)}"""
+        )
 
-    sections.append("""rules:
+    sections.append(
+        """rules:
   - MATCH,🚀 节点选择
-""")
+"""
+    )
 
     full_yaml = "\n".join(sections)
     out_file = os.path.join(outdir, "clash-subscription.yaml")
@@ -150,9 +183,13 @@ proxy-groups:
 
 def main():
     parser = argparse.ArgumentParser(description="VPN 订阅全量提取工具")
-    parser.add_argument("--vpn", choices=["all", "warp", "windscribe", "opera", "proton"], default="all",
-                        help="选择提取的 VPN 类型 (默认: all)")
-    parser.add_argument("--warp-config", default="config.json", help="WARP usque 配置文件路径")
+    parser.add_argument(
+        "--vpn",
+        choices=["all", "warp", "windscribe", "opera", "proton"],
+        default="all",
+        help="选择提取的 VPN 类型 (默认: all)",
+    )
+    parser.add_argument("--warp-config", default="", help="WARP 账户配置文件路径 (可选)")
     parser.add_argument("--outdir", default="dist", help="输出目录")
     args = parser.parse_args()
 
@@ -177,20 +214,15 @@ def main():
         except Exception as e:
             print(f"[Opera] 提取遇到错误: {e}", file=sys.stderr)
 
-    # 3. WARP
+    # 3. WARP (WireGuard 直连，纯 Python 官方 API 注册，无需外部依赖)
     if args.vpn in ("all", "warp"):
-        if os.path.exists(args.warp_config):
-            try:
-                res = generate_warp(args.warp_config, args.outdir)
-                links_file = os.path.join(args.outdir, "warp-masque-links.txt")
-                if os.path.exists(links_file):
-                    with open(links_file, "r", encoding="utf-8") as f:
-                        warp_links = [line.strip() for line in f if line.strip()]
-                        all_links.extend(warp_links)
-            except Exception as e:
-                print(f"[WARP] 提取遇到错误: {e}", file=sys.stderr)
-        else:
-            print(f"[WARP] 未找到 {args.warp_config}，跳过 WARP 提取（可使用 usque register 提前生成）。")
+        try:
+            cfg_path = args.warp_config if args.warp_config and os.path.exists(args.warp_config) else None
+            res = generate_warp(cfg_path, args.outdir)
+            if res and res.get("links"):
+                all_links.extend(res["links"])
+        except Exception as e:
+            print(f"[WARP] 提取遇到错误: {e}", file=sys.stderr)
 
     # 4. Proton
     if args.vpn in ("all", "proton"):

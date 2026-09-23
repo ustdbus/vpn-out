@@ -2,7 +2,7 @@
 
 专为 GitHub Actions 打造的极简 VPN 节点提取器。无需服务器、无需配置复杂的 Cloudflare Worker，一键自动注册、提取多国家/地区的 VPN 代理节点并生成标准订阅。
 
-完美兼容 **sout** 代理面板与各大代理客户端（Mihomo / Clash Verge / ClashMi / Shadowrocket 等）。
+完美兼容 **sout** 代理面板与各大代理客户端（sing-box / Mihomo / Clash Verge / ClashMi / Shadowrocket / WireGuard 客户端等）。
 
 ---
 
@@ -10,9 +10,9 @@
 
 | VPN 服务 | 注册方式 | 节点类型 | 覆盖地区 | 特点 |
 | :--- | :--- | :--- | :--- | :--- |
+| **Cloudflare WARP** | 官方 API 纯 Python 注册 | WireGuard 直连 | 全球任播 Anycast | 直连 `engage.cloudflareclient.com:2408`，标准 WireGuard 凭据，轻量无需优选 |
 | **Windscribe** | Actions 自动开户 | HTTP / HTTPS 代理 | 13 个国家/地区（香港、美国、加拿大、法国、德国、英国、荷兰、挪威、瑞士、罗马尼亚等） | 官方免费 2GB/月，60+ 落地服务器 |
 | **Opera VPN** | 匿名协议自动开户 | HTTPS 代理 | 亚洲、欧洲、美洲 | 不限流量，匿名开户 |
-| **Cloudflare WARP** | MASQUE 协议注册 | MASQUE / WireGuard | 全球任播 Anycast | 57 个优选端点，极低握手延迟与抗封锁 |
 | **Proton VPN** | 凭证自动提取 | WireGuard | 日本、新加坡、美国、荷兰等 | 免费机房节点 |
 
 ---
@@ -25,12 +25,16 @@
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/all-proxies.txt`
 - **Mihomo / Clash 聚合订阅**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/clash-subscription.yaml`
+- **WARP WireGuard 节点单行链接**:
+  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-links.txt`
+- **WARP sing-box WireGuard 出站配置片段**:
+  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-wireguard.json`
+- **WARP WireGuard 客户端配置 (.conf)**:
+  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-wireguard.conf`
 - **Windscribe 独立节点列表**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/windscribe-links.txt`
 - **Opera 独立节点列表**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/opera-links.txt`
-- **WARP MASQUE 独立链接列表**:
-  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-masque-links.txt`
 
 ---
 
