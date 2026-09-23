@@ -6,7 +6,6 @@ Windscribe 账号注册与节点订阅提取器
 
 输出产物：
 - windscribe-links.txt: 单行通用代理链接列表（直接支持导入 sout 与各种客户端）
-- windscribe.yaml: mihomo / Clash 代理配置（支持各国家/地区分组）
 - windscribe-account.json: 账号信息与剩余额度
 """
 import base64
@@ -175,85 +174,11 @@ def generate_windscribe(outdir: str = "dist", existing_acc: dict = None):
         link = f"https://{urllib.parse.quote(user)}:{urllib.parse.quote(pwd)}@{s['host']}:{s['port']}#{urllib.parse.quote(tag)}"
         links.append(link)
 
-    # 2. 生成 Clash / mihomo 格式
-    proxies = []
-    by_loc = {}
-    names = []
-    for s in servers:
-        name = f"WS-{s['tag']}"
-        names.append(name)
-        by_loc.setdefault(s["loc"], []).append(name)
-        proxies.append(
-            f'  - {{name: "{name}", type: http, server: {s["host"]}, port: {s["port"]}, '
-            f'username: "{user}", password: "{pwd}", tls: true, sni: "{s["host"]}", '
-            f'skip-cert-verify: false}}'
-        )
-
-    def q(items, n=6):
-        return "\n".join(" " * n + f'- "{x}"' for x in items)
-
-    def p(items, n=6):
-        return "\n".join(" " * n + f"- {x}" for x in items)
-
-    loc_groups = []
-    loc_group_names = []
-    for loc, tags in by_loc.items():
-        gname = f"WS-{loc}"
-        loc_group_names.append(gname)
-        loc_groups.append(f"""  - name: {gname}
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 100
-    proxies:
-{q(tags)}""")
-
-    clash_yaml = f"""# Windscribe 官方节点订阅
-# 账号: {acc['userId']} (2GB/月)
-# 地区覆盖: 13 个地区，共 {len(servers)} 个节点
-mixed-port: 7890
-allow-lan: false
-mode: rule
-
-proxies:
-{chr(10).join(proxies)}
-
-proxy-groups:
-  - name: 🚀 节点选择
-    type: select
-    proxies:
-      - ♻️ 自动选择
-{p(loc_group_names)}
-      - ☑️ 手动选择
-      - DIRECT
-
-  - name: ♻️ 自动选择
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    proxies:
-{q(names)}
-
-  - name: ☑️ 手动选择
-    type: select
-    proxies:
-{q(names)}
-
-{chr(10).join(loc_groups)}
-
-rules:
-  - MATCH,🚀 节点选择
-"""
-
     links_path = os.path.join(outdir, "windscribe-links.txt")
-    yaml_path = os.path.join(outdir, "windscribe.yaml")
     acc_path = os.path.join(outdir, "windscribe-account.json")
 
     with open(links_path, "w", encoding="utf-8") as f:
         f.write("\n".join(links) + "\n")
-
-    with open(yaml_path, "w", encoding="utf-8") as f:
-        f.write(clash_yaml)
 
     full_acc = {**acc, **cred, "server_count": len(servers)}
     with open(acc_path, "w", encoding="utf-8") as f:
@@ -261,12 +186,10 @@ rules:
 
     print(f"[Windscribe] 产物已保存：")
     print(f"  - 链接列表: {links_path} ({len(links)} 个节点)")
-    print(f"  - YAML: {yaml_path}")
     print(f"  - 账号信息: {acc_path}")
 
     return {
         "links": links_path,
-        "yaml": yaml_path,
         "account": full_acc,
         "servers": servers,
         "proxyUser": user,

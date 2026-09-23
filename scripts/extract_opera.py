@@ -5,7 +5,6 @@ Opera VPN (SurfEasy) 匿名注册与落地节点提取器
 
 输出产物：
 - opera-links.txt: 单行通用 HTTPS/HTTP 代理链接（可直接导入 sout）
-- opera.yaml: mihomo / Clash 代理配置
 - opera-account.json: 凭据与落地详情
 """
 import hashlib
@@ -182,75 +181,11 @@ def generate_opera(outdir: str = "dist"):
         link = f"https://{urllib.parse.quote(id_hash)}:{urllib.parse.quote(password)}@{land['ip']}:{land['port']}#{urllib.parse.quote(land['tag'])}"
         links.append(link)
 
-    # 2. 生成 Clash / mihomo 格式
-    proxies = []
-    names = []
-    by_loc = {}
-    for land in landings:
-        name = land["tag"]
-        names.append(name)
-        by_loc.setdefault(land["loc"], []).append(name)
-        proxies.append(
-            f'  - {{name: "{name}", type: http, server: {land["ip"]}, port: {land["port"]}, '
-            f'username: "{id_hash}", password: "{password}", tls: true, '
-            f'sni: "{land["host"]}", skip-cert-verify: false}}'
-        )
-
-    def q(items, n=6):
-        return "\n".join(" " * n + f'- "{x}"' for x in items)
-
-    loc_groups = []
-    loc_group_names = []
-    for loc, tags in by_loc.items():
-        gname = f"Opera-{loc}"
-        loc_group_names.append(gname)
-        loc_groups.append(f"""  - name: {gname}
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 100
-    proxies:
-{q(tags)}""")
-
-    clash_yaml = f"""# Opera VPN 官方落地节点订阅
-# 区域: 亚洲、欧洲、美洲
-mixed-port: 7890
-allow-lan: false
-mode: rule
-
-proxies:
-{chr(10).join(proxies)}
-
-proxy-groups:
-  - name: 🚀 节点选择
-    type: select
-    proxies:
-      - ♻️ 自动选择
-{chr(10).join(f'      - {x}' for x in loc_group_names)}
-      - DIRECT
-
-  - name: ♻️ 自动选择
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    proxies:
-{q(names)}
-
-{chr(10).join(loc_groups)}
-
-rules:
-  - MATCH,🚀 节点选择
-"""
-
     links_path = os.path.join(outdir, "opera-links.txt")
-    yaml_path = os.path.join(outdir, "opera.yaml")
     acc_path = os.path.join(outdir, "opera-account.json")
 
     with open(links_path, "w", encoding="utf-8") as f:
         f.write("\n".join(links) + "\n")
-
-    with open(yaml_path, "w", encoding="utf-8") as f:
-        f.write(clash_yaml)
 
     acc_data = {
         "username": id_hash,
@@ -262,12 +197,10 @@ rules:
 
     print(f"[Opera] 产物已保存：")
     print(f"  - 链接列表: {links_path} ({len(links)} 个节点)")
-    print(f"  - YAML: {yaml_path}")
     print(f"  - 账号信息: {acc_path}")
 
     return {
         "links": links_path,
-        "yaml": yaml_path,
         "username": id_hash,
         "password": password,
         "landings": landings,

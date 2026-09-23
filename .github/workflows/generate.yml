@@ -71,7 +71,7 @@ jobs:
             cp -r dist/* repo-sub/
           fi
 
-          # 在 repo-sub 中重新调用全量智能聚合（确保 all-proxies.txt 和 clash-subscription.yaml 包含所有源）
+          # 在 repo-sub 中重新调用全量智能聚合（确保 all-proxies.txt 包含所有源）
           python3 scripts/extract_all.py --aggregate-only --outdir repo-sub
 
           cd repo-sub
@@ -103,12 +103,11 @@ jobs:
             echo ""
             echo "### 📦 在线订阅直链 (可直接复制到 sout 面板订阅源中):"
             echo "- **单行代理节点聚合列表 (sout 推荐)**: \`https://raw.githubusercontent.com/${REPO}/sub/all-proxies.txt\`"
-            echo "- **Mihomo / Clash 聚合订阅**: \`https://raw.githubusercontent.com/${REPO}/sub/clash-subscription.yaml\`"
+            echo "- **Windscribe 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/windscribe-links.txt\`"
+            echo "- **Opera 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/opera-links.txt\`"
             echo "- **WARP WireGuard 节点单行链接**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-links.txt\`"
             echo "- **WARP sing-box 出站配置**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-wireguard.json\`"
             echo "- **WARP 客户端配置 (.conf)**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-wireguard.conf\`"
-            echo "- **Windscribe 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/windscribe-links.txt\`"
-            echo "- **Opera 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/opera-links.txt\`"
             echo ""
             echo "### 📄 提取产物文件列表:"
             if [ -d dist ]; then

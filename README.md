@@ -2,7 +2,7 @@
 
 专为 GitHub Actions 打造的极简 VPN 节点提取器。无需服务器、无需配置复杂的 Cloudflare Worker，一键自动注册、提取多国家/地区的 VPN 代理节点并生成标准订阅。
 
-完美兼容 **sout** 代理面板与各大代理客户端（sing-box / Mihomo / Clash Verge / ClashMi / Shadowrocket / WireGuard 客户端等）。
+完美兼容 **sout** 代理面板与各大代理客户端（sing-box / Shadowrocket / WireGuard 客户端等）。
 
 ---
 
@@ -23,8 +23,6 @@
 
 - **单行代理节点聚合列表 (sout 推荐首选)**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/all-proxies.txt`
-- **Mihomo / Clash 聚合订阅**:
-  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/clash-subscription.yaml`
 - **Windscribe 独立节点列表 (HTTP/HTTPS 代理)**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/windscribe-links.txt`
 - **Opera 独立节点列表 (HTTPS 代理)**:
@@ -46,7 +44,7 @@
    - 在弹出的窗口中，将从上面链接复制的节点链接（或直接输入订阅链接）粘贴进去，点击 **「批量解析并导入」** 即可一键加入出口隧道池！
 3. 方式 B（自动定时订阅）：
    - 点击 **「SOCKS5 订阅源」**。
-   - 添加源名称（如 `VPN-OUT 订阅源`）以及上面的 `all-proxies.txt` 或 `clash-subscription.yaml` 链接。
+   - 添加源名称（如 `VPN-OUT 订阅源`）以及上面的 `all-proxies.txt` 链接。
    - sout 会自动同步节点并按家宽/机房进行识别，之后在下方节点列表中绑定分流即可。
 
 ---
