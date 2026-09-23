@@ -1,0 +1,8 @@
+dist/
+__pycache__/
+*.pyc
+*.zip
+check/
+config.json
+sample-warp.json
+usque
