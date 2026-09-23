@@ -62,21 +62,22 @@ jobs:
         if: ${{ github.event.inputs.publish_sub_branch != 'false' }}
         run: |
           set -euo pipefail
+          PUBLISH_DIR=$(mktemp -d)
+          cp -r dist/* "$PUBLISH_DIR/"
+          
+          git clone --depth 1 --branch sub "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" repo-sub 2>/dev/null || {
+            mkdir repo-sub
+            cd repo-sub
+            git init
+            git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+            git checkout -b sub
+            cd ..
+          }
+          cd repo-sub
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          # 创建或切换到孤立的 sub 分支
-          git fetch origin || true
-          if git ls-remote --exit-code --heads origin sub; then
-            git checkout sub
-            git rm -rf . || true
-          else
-            git checkout --orphan sub
-            git rm -rf . || true
-          fi
-          
-          # 拷贝生成出来的所有产物
-          cp -r dist/* .
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+          cp -r "$PUBLISH_DIR"/* .
           git add -A
           if git diff --staged --quiet; then
             echo "订阅内容无变动，跳过提交"
@@ -84,6 +85,8 @@ jobs:
             git commit -m "自动更新: VPN 节点订阅 ($(date -u '+%Y-%m-%d %H:%M:%S') UTC)"
             git push origin sub --force
           fi
+          cd ..
+          rm -rf repo-sub "$PUBLISH_DIR"
 
       - name: 上传构建产物 (Artifacts)
         uses: actions/upload-artifact@v4
