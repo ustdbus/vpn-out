@@ -10,10 +10,10 @@
 
 | VPN 服务 | 注册方式 | 节点类型 | 覆盖地区 | 特点 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Cloudflare WARP** | 官方 API 纯 Python 注册 | WireGuard 直连 | 全球任播 Anycast | 直连 `engage.cloudflareclient.com:2408`，标准 WireGuard 凭据，轻量无需优选 |
 | **Windscribe** | Actions 自动开户 | HTTP / HTTPS 代理 | 13 个国家/地区（香港、美国、加拿大、法国、德国、英国、荷兰、挪威、瑞士、罗马尼亚等） | 官方免费 2GB/月，60+ 落地服务器 |
 | **Opera VPN** | 匿名协议自动开户 | HTTPS 代理 | 亚洲、欧洲、美洲 | 不限流量，匿名开户 |
 | **Proton VPN** | 凭证自动提取 | WireGuard | 日本、新加坡、美国、荷兰等 | 免费机房节点 |
+
 
 ---
 
@@ -27,12 +27,11 @@
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/windscribe-links.txt`
 - **Opera 独立节点列表 (HTTPS 代理)**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/opera-links.txt`
-- **WARP WireGuard 节点单行链接**:
-  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-links.txt`
-- **WARP sing-box WireGuard 出站配置片段 (JSON)**:
-  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-wireguard.json`
-- **WARP WireGuard 客户端配置 (.conf)** *(⚠️ 仅供 WireGuard 官方客户端导入，sout 面板请使用上方 .txt 或 .json)*:
-  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-wireguard.conf`
+- **Proton 独立节点列表 (WireGuard)**:
+  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/proton-links.txt`
+
+> **提示**：Cloudflare WARP 推荐直接在 **sout** 面板中「申请并创建 WARP 出口」，由本机直接调用 Cloudflare 官方 API 注册独立专属账户，无需再通过外部订阅导入。
+
 
 ---
 

@@ -4,11 +4,11 @@ VPN 订阅与节点全量自动化提取器
 一键调用各个 VPN 提取模块，并将所有提取出的节点聚合导出：
 
 产物列表：
-1. all-proxies.txt: 聚合所有 VPN 节点的单行通用代理链接（包含 WireGuard / SOCKS5 / HTTP / HTTPS）
+1. all-proxies.txt: 聚合所有 VPN 节点的单行通用代理链接（包含 SOCKS5 / HTTP / HTTPS / WireGuard）
 2. 单独提取文件：
-   - warp-wireguard.json / warp-wireguard.conf / warp-links.txt
    - windscribe-links.txt
    - opera-links.txt
+   - proton-links.txt
 """
 import argparse
 import asyncio
@@ -23,10 +23,10 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-from extract_warp import generate_warp
 from extract_windscribe import generate_windscribe
 from extract_opera import generate_opera
 from extract_proton import extract_proton_async
+
 
 
 
@@ -54,7 +54,6 @@ def build_aggregated_links(outdir: str, current_links: list = None) -> list:
     known_link_files = [
         "windscribe-links.txt",
         "opera-links.txt",
-        "warp-links.txt",
         "proton-links.txt",
     ]
     for fn in known_link_files:
@@ -78,11 +77,10 @@ def main():
     parser = argparse.ArgumentParser(description="VPN 订阅全量提取工具")
     parser.add_argument(
         "--vpn",
-        choices=["all", "warp", "windscribe", "opera", "proton"],
+        choices=["all", "windscribe", "opera", "proton"],
         default="all",
         help="选择提取的 VPN 类型 (默认: all)",
     )
-    parser.add_argument("--warp-config", default="", help="WARP 账户配置文件路径 (可选)")
     parser.add_argument("--outdir", default="dist", help="输出目录")
     parser.add_argument(
         "--aggregate-only",
@@ -119,17 +117,8 @@ def main():
         except Exception as e:
             print(f"[Opera] 提取遇到错误: {e}", file=sys.stderr)
 
-    # 3. WARP (WireGuard 直连，纯 Python 官方 API 注册，无需外部依赖)
-    if args.vpn in ("all", "warp"):
-        try:
-            cfg_path = args.warp_config if args.warp_config and os.path.exists(args.warp_config) else None
-            res = generate_warp(cfg_path, args.outdir)
-            if res and res.get("links"):
-                all_links.extend(res["links"])
-        except Exception as e:
-            print(f"[WARP] 提取遇到错误: {e}", file=sys.stderr)
 
-    # 4. Proton
+    # 3. Proton
     if args.vpn in ("all", "proton"):
         try:
             asyncio.run(extract_proton_async(args.outdir))

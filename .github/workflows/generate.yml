@@ -12,7 +12,6 @@ on:
           - all
           - windscribe
           - opera
-          - warp
           - proton
       publish_sub_branch:
         description: '是否将订阅发布到 sub 分支（提供永久在线的 raw 订阅链接）'
@@ -105,9 +104,8 @@ jobs:
             echo "- **单行代理节点聚合列表 (sout 推荐)**: \`https://raw.githubusercontent.com/${REPO}/sub/all-proxies.txt\`"
             echo "- **Windscribe 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/windscribe-links.txt\`"
             echo "- **Opera 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/opera-links.txt\`"
-            echo "- **WARP WireGuard 节点单行链接**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-links.txt\`"
-            echo "- **WARP sing-box 出站配置**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-wireguard.json\`"
-            echo "- **WARP 客户端配置 (.conf)**: \`https://raw.githubusercontent.com/${REPO}/sub/warp-wireguard.conf\`"
+            echo "- **Proton 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/proton-links.txt\`"
+
             echo ""
             echo "### 📄 提取产物文件列表:"
             if [ -d dist ]; then
