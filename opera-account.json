@@ -1,0 +1,90 @@
+{
+  "username": "F21DFC7B5B9C585135AC516F349D5787EB37CD29",
+  "password": "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA",
+  "landings": [
+    {
+      "tag": "Opera-亚洲1",
+      "loc": "亚洲",
+      "ip": "77.111.246.36",
+      "port": 443,
+      "host": "as0.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-亚洲2",
+      "loc": "亚洲",
+      "ip": "77.111.246.48",
+      "port": 443,
+      "host": "as1.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-亚洲3",
+      "loc": "亚洲",
+      "ip": "77.111.246.26",
+      "port": 443,
+      "host": "as2.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-亚洲4",
+      "loc": "亚洲",
+      "ip": "77.111.246.14",
+      "port": 443,
+      "host": "as3.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-欧洲1",
+      "loc": "欧洲",
+      "ip": "77.111.246.32",
+      "port": 443,
+      "host": "eu0.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-欧洲2",
+      "loc": "欧洲",
+      "ip": "77.111.246.56",
+      "port": 443,
+      "host": "eu1.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-欧洲3",
+      "loc": "欧洲",
+      "ip": "77.111.246.26",
+      "port": 443,
+      "host": "eu2.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-欧洲4",
+      "loc": "欧洲",
+      "ip": "77.111.246.63",
+      "port": 443,
+      "host": "eu3.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-美洲1",
+      "loc": "美洲",
+      "ip": "77.111.246.34",
+      "port": 443,
+      "host": "am0.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-美洲2",
+      "loc": "美洲",
+      "ip": "77.111.246.24",
+      "port": 443,
+      "host": "am1.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-美洲3",
+      "loc": "美洲",
+      "ip": "77.111.246.63",
+      "port": 443,
+      "host": "am2.sec-tunnel.com"
+    },
+    {
+      "tag": "Opera-美洲4",
+      "loc": "美洲",
+      "ip": "77.111.246.60",
+      "port": 443,
+      "host": "am3.sec-tunnel.com"
+    }
+  ]
+}

@@ -5,9 +5,9 @@
   "server_port": 2408,
   "local_address": [
     "172.16.0.2/32",
-    "2606:4700:110:863a:5f66:2949:969e:c779/128"
+    "2606:4700:110:82b5:b172:ccbc:86c0:474f/128"
   ],
-  "private_key": "gAA9RhXX9dWIlDsVBFx+qmQaFhV0UQvcOW4cGsah+UM=",
+  "private_key": "mOA+EXaCK1DaTteyyBgfh9WuFFdzdhvcCxcm6Pve2Hk=",
   "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
   "reserved": [
     0,

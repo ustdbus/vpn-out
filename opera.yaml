@@ -1,0 +1,81 @@
+# Opera VPN 官方落地节点订阅
+# 区域: 亚洲、欧洲、美洲
+mixed-port: 7890
+allow-lan: false
+mode: rule
+
+proxies:
+  - {name: "Opera-亚洲1", type: http, server: 77.111.246.36, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "as0.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-亚洲2", type: http, server: 77.111.246.48, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "as1.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-亚洲3", type: http, server: 77.111.246.26, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "as2.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-亚洲4", type: http, server: 77.111.246.14, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "as3.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-欧洲1", type: http, server: 77.111.246.32, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "eu0.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-欧洲2", type: http, server: 77.111.246.56, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "eu1.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-欧洲3", type: http, server: 77.111.246.26, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "eu2.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-欧洲4", type: http, server: 77.111.246.63, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "eu3.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-美洲1", type: http, server: 77.111.246.34, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "am0.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-美洲2", type: http, server: 77.111.246.24, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "am1.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-美洲3", type: http, server: 77.111.246.63, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "am2.sec-tunnel.com", skip-cert-verify: false}
+  - {name: "Opera-美洲4", type: http, server: 77.111.246.60, port: 443, username: "F21DFC7B5B9C585135AC516F349D5787EB37CD29", password: "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJEVWYxMDBfZFNreE43bUYzSlhwVHpWcW9RZktEN3hrbTFaQ3pvZ3pBVnBzIiwieSI6ImlLZFNHTTVUV1BRVVVLcHo2N040eXRObTl5bXV4ZHNlNUZsdjJ3N2ZKcEEifX0.9q-SznJStHnhvbCcxmdfhk0ZW7NxLmePBSa2QKMJpP_xMlcz1oV3tg.4qSosJufqHNuI3_C.EYAE_nuzrjSPRskC2-Ja_loAMMmS46ofvz8wqmH_FRAb1HO90VA2j-loRjHTv-Z_cedmjbTz_DZ793p4kMiKQiUlmh7J72dvDsrZVP3jdL0KGOLLbZ6mf7ZCpEQ8f50bRRNoqPXGlD6pBwabrQ6c8C1ajhZMy0YpHZW4t2xygXdmOrqhnOCO1aoS8W99lF8u8isCXS6Oa-EYC2Xuvdy8E7BR_Bu4cGBb4BmXMKTFPmMgyqJOZk2nMaRUIgPqtD_Zz_HkJ3tefrBIYBuxn02G65WJkRmnGXdFJoVmE-jA54Ku_KGDtBg4wXvCxWm232U18wT6Zp7bwmBbG90AjCNyiIRdJkJjSdV6XxLQqB4WWGOCVgQluV2Rf4HK0wxAycSQdiat.0usu5_xBjMkYbmVRVbU7GA", tls: true, sni: "am3.sec-tunnel.com", skip-cert-verify: false}
+
+proxy-groups:
+  - name: 🚀 节点选择
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - Opera-亚洲
+      - Opera-欧洲
+      - Opera-美洲
+      - DIRECT
+
+  - name: ♻️ 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - "Opera-亚洲1"
+      - "Opera-亚洲2"
+      - "Opera-亚洲3"
+      - "Opera-亚洲4"
+      - "Opera-欧洲1"
+      - "Opera-欧洲2"
+      - "Opera-欧洲3"
+      - "Opera-欧洲4"
+      - "Opera-美洲1"
+      - "Opera-美洲2"
+      - "Opera-美洲3"
+      - "Opera-美洲4"
+
+  - name: Opera-亚洲
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    proxies:
+      - "Opera-亚洲1"
+      - "Opera-亚洲2"
+      - "Opera-亚洲3"
+      - "Opera-亚洲4"
+  - name: Opera-欧洲
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    proxies:
+      - "Opera-欧洲1"
+      - "Opera-欧洲2"
+      - "Opera-欧洲3"
+      - "Opera-欧洲4"
+  - name: Opera-美洲
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    proxies:
+      - "Opera-美洲1"
+      - "Opera-美洲2"
+      - "Opera-美洲3"
+      - "Opera-美洲4"
+
+rules:
+  - MATCH,🚀 节点选择
