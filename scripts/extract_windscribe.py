@@ -168,11 +168,11 @@ def generate_windscribe(outdir: str = "dist", existing_acc: dict = None):
     pwd = cred["proxyPass"]
 
     # 1. 生成单行代理链接列表（可直接导入 sout 和其它客户端）
-    # 格式: http://user:pass@host:443#WS-地区
+    # 格式: https://user:pass@host:443#WS-地区
     links = []
     for s in servers:
         tag = f"WS-{s['tag']}"
-        link = f"http://{urllib.parse.quote(user)}:{urllib.parse.quote(pwd)}@{s['host']}:{s['port']}#{urllib.parse.quote(tag)}"
+        link = f"https://{urllib.parse.quote(user)}:{urllib.parse.quote(pwd)}@{s['host']}:{s['port']}#{urllib.parse.quote(tag)}"
         links.append(link)
 
     # 2. 生成 Clash / mihomo 格式
