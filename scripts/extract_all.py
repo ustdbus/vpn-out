@@ -84,6 +84,15 @@ def build_aggregated_clash(outdir: str):
     op_names = [x for x in proxy_names if x.startswith("Opera-")]
     warp_names = [x for x in proxy_names if x.startswith("WARP")]
 
+    main_proxies = ["♻️ 自动选择"]
+    if ws_names:
+        main_proxies.append("🛡️ Windscribe节点")
+    if op_names:
+        main_proxies.append("🎭 Opera节点")
+    if warp_names:
+        main_proxies.append("⚡ WARP直连")
+    main_proxies.append("DIRECT")
+
     sections = [
         """mixed-port: 7890
 allow-lan: false
@@ -93,23 +102,19 @@ ipv6: true
 
 proxies:
 """ + "\n".join(proxies_lines),
-        """
+        f"""
 proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
-      - ♻️ 自动选择
-      - 🛡️ Windscribe节点
-      - 🎭 Opera节点
-      - ⚡ WARP直连
-      - DIRECT
+{ind(main_proxies)}
 
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-""" + ind(proxy_names)
+{ind(proxy_names)}"""
     ]
 
     if ws_names:

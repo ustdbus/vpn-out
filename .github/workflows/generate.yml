@@ -39,7 +39,7 @@ jobs:
           python-version: '3.12'
 
       - name: 准备 WARP 注册工具 (若需要)
-        if: ${{ inputs.vpn_type == 'all' || inputs.vpn_type == 'warp' }}
+        if: ${{ !inputs.vpn_type || inputs.vpn_type == 'all' || inputs.vpn_type == 'warp' }}
         run: |
           set -euo pipefail
           VER=$(curl -sL https://api.github.com/repos/Diniboy1123/usque/releases/latest | jq -r '.tag_name' | sed 's/^v//')
@@ -59,7 +59,7 @@ jobs:
           ls -la dist/
 
       - name: 发布订阅文件到 sub 分支
-        if: ${{ github.event.inputs.publish_sub_branch != 'false' }}
+        if: ${{ always() && (github.event_name == 'schedule' || !inputs.publish_sub_branch || inputs.publish_sub_branch == true || inputs.publish_sub_branch == 'true') }}
         run: |
           set -euo pipefail
           PUBLISH_DIR=$(mktemp -d)
