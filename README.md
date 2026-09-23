@@ -21,20 +21,20 @@
 
 工作流执行完成后，会自动将最新的可用节点发布到本仓库的 `sub` 分支，您可以直接使用 RAW 直链作为**永远在线、自动更新的订阅源**：
 
-- **单行代理节点聚合列表 (sout 推荐)**:
+- **单行代理节点聚合列表 (sout 推荐首选)**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/all-proxies.txt`
 - **Mihomo / Clash 聚合订阅**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/clash-subscription.yaml`
+- **Windscribe 独立节点列表 (HTTP/HTTPS 代理)**:
+  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/windscribe-links.txt`
+- **Opera 独立节点列表 (HTTPS 代理)**:
+  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/opera-links.txt`
 - **WARP WireGuard 节点单行链接**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-links.txt`
-- **WARP sing-box WireGuard 出站配置片段**:
+- **WARP sing-box WireGuard 出站配置片段 (JSON)**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-wireguard.json`
-- **WARP WireGuard 客户端配置 (.conf)**:
+- **WARP WireGuard 客户端配置 (.conf)** *(⚠️ 仅供 WireGuard 官方客户端导入，sout 面板请使用上方 .txt 或 .json)*:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/warp-wireguard.conf`
-- **Windscribe 独立节点列表**:
-  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/windscribe-links.txt`
-- **Opera 独立节点列表**:
-  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/opera-links.txt`
 
 ---
 

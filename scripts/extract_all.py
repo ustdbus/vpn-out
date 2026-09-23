@@ -181,6 +181,48 @@ proxy-groups:
     print(f"[聚合订阅] 已生成 mihomo 聚合配置文件: {out_file} (共 {len(proxy_names)} 个节点)")
 
 
+def build_aggregated_links(outdir: str, current_links: list = None) -> list:
+    """读取 outdir 下所有的独立节点文件，并与当前生成的 links 智能合并去重"""
+    merged = []
+    seen = set()
+
+    def add_link(link: str):
+        link = link.strip()
+        if not link or link.startswith("#"):
+            return
+        if link not in seen:
+            seen.add(link)
+            merged.append(link)
+
+    # 1. 优先加入当前提取轮次产生的链接
+    if current_links:
+        for lk in current_links:
+            add_link(lk)
+
+    # 2. 依次扫描并合并各个 VPN 独立的 links.txt 文件（确保历史有效节点不丢失）
+    known_link_files = [
+        "windscribe-links.txt",
+        "opera-links.txt",
+        "warp-links.txt",
+        "proton-links.txt",
+    ]
+    for fn in known_link_files:
+        fp = os.path.join(outdir, fn)
+        if os.path.exists(fp):
+            try:
+                with open(fp, "r", encoding="utf-8") as f:
+                    for line in f:
+                        add_link(line)
+            except Exception as e:
+                print(f"[聚合警告] 读取 {fn} 失败: {e}", file=sys.stderr)
+
+    out_file = os.path.join(outdir, "all-proxies.txt")
+    with open(out_file, "w", encoding="utf-8") as f:
+        f.write("\n".join(merged) + "\n")
+    print(f"\n[聚合单行列表] 已汇总保存到 {out_file} (共 {len(merged)} 条可用连接)")
+    return merged
+
+
 def main():
     parser = argparse.ArgumentParser(description="VPN 订阅全量提取工具")
     parser.add_argument(
@@ -191,9 +233,22 @@ def main():
     )
     parser.add_argument("--warp-config", default="", help="WARP 账户配置文件路径 (可选)")
     parser.add_argument("--outdir", default="dist", help="输出目录")
+    parser.add_argument(
+        "--aggregate-only",
+        action="store_true",
+        help="仅根据 outdir 中的各独立产物重新生成全量 all-proxies.txt 与 clash-subscription.yaml",
+    )
     args = parser.parse_args()
 
     os.makedirs(args.outdir, exist_ok=True)
+
+    if args.aggregate_only:
+        print(f"[聚合模式] 仅重新聚合 {args.outdir} 下的产物...")
+        build_aggregated_links(args.outdir, [])
+        build_aggregated_clash(args.outdir)
+        print("[OK] 重新聚合完成！")
+        return
+
     all_links = []
 
     # 1. Windscribe
@@ -231,11 +286,8 @@ def main():
         except Exception as e:
             print(f"[Proton] 提取遇到错误: {e}", file=sys.stderr)
 
-    # 写入聚合单行链接文件
-    all_links_file = os.path.join(args.outdir, "all-proxies.txt")
-    with open(all_links_file, "w", encoding="utf-8") as f:
-        f.write("\n".join(all_links) + "\n")
-    print(f"\n[聚合单行列表] 已汇总保存到 {all_links_file} (共 {len(all_links)} 条可用连接)")
+    # 智能增量合并写入聚合单行链接文件
+    build_aggregated_links(args.outdir, all_links)
 
     # 组装聚合 Clash 订阅
     build_aggregated_clash(args.outdir)
