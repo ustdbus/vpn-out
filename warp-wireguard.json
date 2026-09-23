@@ -1,0 +1,18 @@
+{
+  "type": "wireguard",
+  "tag": "WARP-WireGuard",
+  "server": "engage.cloudflareclient.com",
+  "server_port": 2408,
+  "local_address": [
+    "172.16.0.2/32",
+    "2606:4700:110:863a:5f66:2949:969e:c779/128"
+  ],
+  "private_key": "gAA9RhXX9dWIlDsVBFx+qmQaFhV0UQvcOW4cGsah+UM=",
+  "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+  "reserved": [
+    0,
+    0,
+    0
+  ],
+  "mtu": 1280
+}
