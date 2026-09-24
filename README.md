@@ -13,6 +13,7 @@
 | **Windscribe** | Actions 自动开户 | HTTP / HTTPS 代理 | 13 个国家/地区（香港、美国、加拿大、法国、德国、英国、荷兰、挪威、瑞士、罗马尼亚等） | 官方免费 2GB/月，60+ 落地服务器 |
 | **Opera VPN** | 匿名协议自动开户 | HTTPS 代理 | 亚洲、欧洲、美洲 | 不限流量，匿名开户 |
 | **Proton VPN** | 凭证自动提取 | WireGuard | 日本、新加坡、美国、荷兰等 | 免费机房节点 |
+| **Hide.me (独立源)** | 扩展协议免密提取 | SOCKS5 代理 | 瑞士、荷兰、美国等 | 官方免费免密 SOCKS5，独立更新 |
 
 
 ---
@@ -29,6 +30,8 @@
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/opera-links.txt`
 - **Proton 独立节点列表 (WireGuard)**:
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/proton-links.txt`
+- **Hide.me 独立节点列表 (SOCKS5 代理，独立源未并入 all)**:
+  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/hideme-links.txt`
 
 > **提示**：Cloudflare WARP 推荐直接在 **sout** 面板中「申请并创建 WARP 出口」，由本机直接调用 Cloudflare 官方 API 注册独立专属账户，无需再通过外部订阅导入。
 
@@ -57,5 +60,6 @@
      - **`Windscribe 订阅自动化更新`**：单独开户并刷新 Windscribe 节点与订阅。
      - **`Opera VPN 订阅自动化更新`**：单独探测并刷新 Opera 落地节点。
      - **`Proton VPN 订阅自动化更新`**：单独申请证书并刷新 Proton WireGuard 节点（需配置 `PROTON_USER`/`PROTON_PASS` Secrets）。
+     - **`Hide.me 免费代理订阅自动化更新`**：单独探测并刷新 Hide.me 免密 SOCKS5 代理（独立维护，不影响聚合列表）。
      - **`全量 VPN 订阅自动化提取与更新 (All)`**：随时手动全量刷新全部节点。
 3. 运行完成后，各工作流均会自动将结果同步至 `sub` 分支，更新对应的独立订阅直链及 `all-proxies.txt` 聚合列表。

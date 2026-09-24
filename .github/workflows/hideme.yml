@@ -1,0 +1,111 @@
+name: Hide.me 免费代理订阅自动化更新
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish_sub_branch:
+        description: '是否将订阅发布到 sub 分支（提供永久在线的 raw 订阅链接）'
+        required: false
+        type: boolean
+        default: true
+  schedule:
+    # 每天北京时间凌晨 04:00 (UTC 20:00) 自动刷新一次动态端口与节点
+    - cron: '0 20 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  extract-hideme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 配置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 执行 Hide.me 免费代理节点拉取与连通性验证
+        run: |
+          set -euo pipefail
+          python3 scripts/extract_hideme.py dist
+          ls -la dist/
+
+      - name: 发布订阅文件到 sub 分支 (独立源，不合并至 all-proxies.txt)
+        if: ${{ always() && (github.event_name == 'schedule' || !inputs.publish_sub_branch || inputs.publish_sub_branch == true || inputs.publish_sub_branch == 'true') }}
+        run: |
+          set -euo pipefail
+          
+          git clone --depth 1 --branch sub "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" repo-sub 2>/dev/null || {
+            mkdir repo-sub
+            cd repo-sub
+            git init
+            git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+            git checkout -b sub
+            cd ..
+          }
+
+          # 仅同步 Hide.me 专属产物进 repo-sub，完全不影响其它服务和 all-proxies.txt
+          if [ -f dist/hideme-links.txt ]; then
+            cp dist/hideme-links.txt repo-sub/
+          fi
+          if [ -f dist/hideme-account.json ]; then
+            cp dist/hideme-account.json repo-sub/
+          fi
+
+          cd repo-sub
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hideme-links.txt hideme-account.json
+          if git diff --staged --quiet; then
+            echo "Hide.me 订阅内容无变动，跳过提交"
+          else
+            git commit -m "自动更新: Hide.me 独立节点订阅 ($(date -u '+%Y-%m-%d %H:%M:%S') UTC)"
+            for attempt in {1..5}; do
+              if git push origin sub; then
+                echo "成功推送到 sub 分支"
+                break
+              fi
+              echo "推送发生竞争，拉取最新内容重试 ($attempt/5)..."
+              sleep $((attempt * 3))
+              git fetch origin sub || true
+              git rebase -X ours origin/sub || true
+              if [ -f ../dist/hideme-links.txt ]; then
+                cp ../dist/hideme-links.txt ./
+              fi
+              if [ -f ../dist/hideme-account.json ]; then
+                cp ../dist/hideme-account.json ./
+              fi
+              git add hideme-links.txt hideme-account.json
+              git commit --amend --no-edit || true
+            done
+          fi
+          cd ..
+          rm -rf repo-sub
+
+      - name: 上传构建产物 (Artifacts)
+        uses: actions/upload-artifact@v4
+        with:
+          name: hideme-subscription
+          path: dist/
+          retention-days: 7
+
+      - name: 生成运行报告与订阅链接
+        if: always()
+        run: |
+          REPO="${{ github.repository }}"
+          {
+            echo "## 🚀 Hide.me 免费代理订阅提取完成"
+            echo ""
+            echo "### 📦 在线订阅直链 (可直接复制到 sout 面板订阅源中):"
+            echo "- **Hide.me 独立节点列表 (SOCKS5)**: \`https://raw.githubusercontent.com/${REPO}/sub/hideme-links.txt\`"
+            echo ""
+            echo "> **说明**：Hide.me 订阅作为独立订阅源维护，未合并入 \`all-proxies.txt\`。"
+            echo ""
+            echo "### 📄 本次提取产物文件列表:"
+            if [ -d dist ]; then
+              ls -l dist | grep hideme | awk '{print "- " $9 " (" $5 " bytes)"}'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
