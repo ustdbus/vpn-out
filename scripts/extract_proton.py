@@ -57,9 +57,20 @@ async def extract_proton_async(outdir: str = "dist", strict: bool = False):
 
     os.makedirs(outdir, exist_ok=True)
     print("[Proton] 正在登录 Proton 账户...")
-    s = Session(appversion="linux-vpn@4.8.2", user_agent="ProtonVPN/4.8.2 (Linux; Ubuntu/24.04)")
-    if not await s.async_authenticate(user, pwd):
-        print("[Proton] 登录失败：账号密码错误或触发风控", file=sys.stderr)
+    clean_user = user.strip()
+    clean_pwd = pwd.strip()
+    auth_ok = await s.async_authenticate(clean_user, clean_pwd)
+    if not auth_ok:
+        err_msg = (
+            "[Proton 登录认证失败]\n"
+            "可能原因如下：\n"
+            "1. 账号密码输入错误（请核对 GitHub Secrets 的 PROTON_USER 和 PROTON_PASS）；\n"
+            "2. 您的 Proton 账号开启了 2FA 双重身份验证（脚本 API 无法通过 2FA 验证，需使用未开启 2FA 的账号）；\n"
+            "3. 触发了 Proton 官方风控拦截（Proton 对来自 GitHub 机房 IP 的非交互式登录进行了人机验证阻断）。"
+        )
+        print(err_msg, file=sys.stderr)
+        if strict:
+            raise RuntimeError("Proton 官方登录认证失败，无法签发证书。")
         return None
 
     sk = ed25519.Ed25519PrivateKey.generate()
