@@ -1,32 +1,22 @@
-name: 全量 VPN 订阅自动化提取与更新 (All)
+name: Opera VPN 订阅自动化更新
 
 on:
   workflow_dispatch:
     inputs:
-      vpn_type:
-        description: '需要提取的 VPN 类型'
-        required: true
-        default: 'all'
-        type: choice
-        options:
-          - all
-          - windscribe
-          - opera
-          - proton
       publish_sub_branch:
         description: '是否将订阅发布到 sub 分支（提供永久在线的 raw 订阅链接）'
         required: false
         type: boolean
         default: true
   schedule:
-    # 每天凌晨 4 点自动刷新节点状态，保持链接高可用与新鲜度（每月 1 号自动对齐重置）
-    - cron: '0 4 * * *'
+    # 每天凌晨 3:30 自动探测刷新 Opera VPN 落地节点
+    - cron: '30 3 * * *'
 
 permissions:
   contents: write
 
 jobs:
-  extract:
+  extract-opera:
     runs-on: ubuntu-latest
     steps:
       - name: 检出仓库代码
@@ -37,18 +27,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: 安装依赖
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install cryptography
-
-      - name: 执行自动化注册与订阅提取
-        env:
-          PROTON_USER: ${{ secrets.PROTON_USER }}
-          PROTON_PASS: ${{ secrets.PROTON_PASS }}
+      - name: 执行 Opera VPN 匿名开户与节点探测
         run: |
           set -euo pipefail
-          python3 scripts/extract_all.py --vpn "${{ inputs.vpn_type || 'all' }}" --outdir dist
+          python3 scripts/extract_all.py --vpn opera --outdir dist
           ls -la dist/
 
       - name: 发布订阅文件到 sub 分支
@@ -65,12 +47,12 @@ jobs:
             cd ..
           }
 
-          # 将新提取的文件增量覆盖同步进 repo-sub（安全保留其它服务的历史有效产物）
+          # 增量同步 Opera 相关产物进 repo-sub，不影响其他 VPN 节点
           if [ -d dist ] && [ "$(ls -A dist)" ]; then
             cp -r dist/* repo-sub/
           fi
 
-          # 在 repo-sub 中重新调用全量智能聚合（确保 all-proxies.txt 包含所有源）
+          # 重新聚合全量 all-proxies.txt
           python3 scripts/extract_all.py --aggregate-only --outdir repo-sub
 
           cd repo-sub
@@ -80,7 +62,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "订阅内容无变动，跳过提交"
           else
-            git commit -m "自动更新: VPN 节点订阅 ($(date -u '+%Y-%m-%d %H:%M:%S') UTC)"
+            git commit -m "自动更新: Opera VPN 节点订阅 ($(date -u '+%Y-%m-%d %H:%M:%S') UTC)"
             git push origin sub --force
           fi
           cd ..
@@ -89,7 +71,7 @@ jobs:
       - name: 上传构建产物 (Artifacts)
         uses: actions/upload-artifact@v4
         with:
-          name: vpn-subscriptions
+          name: opera-subscription
           path: dist/
           retention-days: 7
 
@@ -98,16 +80,13 @@ jobs:
         run: |
           REPO="${{ github.repository }}"
           {
-            echo "## 🚀 VPN 订阅提取完成"
+            echo "## 🚀 Opera VPN 订阅提取完成"
             echo ""
             echo "### 📦 在线订阅直链 (可直接复制到 sout 面板订阅源中):"
-            echo "- **单行代理节点聚合列表 (sout 推荐)**: \`https://raw.githubusercontent.com/${REPO}/sub/all-proxies.txt\`"
-            echo "- **Windscribe 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/windscribe-links.txt\`"
-            echo "- **Opera 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/opera-links.txt\`"
-            echo "- **Proton 节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/proton-links.txt\`"
-
+            echo "- **Opera 独立节点列表**: \`https://raw.githubusercontent.com/${REPO}/sub/opera-links.txt\`"
+            echo "- **单行代理节点聚合列表 (全部汇总)**: \`https://raw.githubusercontent.com/${REPO}/sub/all-proxies.txt\`"
             echo ""
-            echo "### 📄 提取产物文件列表:"
+            echo "### 📄 本次提取产物文件列表:"
             if [ -d dist ]; then
               ls -l dist | awk '{print "- " $9 " (" $5 " bytes)"}'
             fi

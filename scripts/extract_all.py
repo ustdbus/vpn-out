@@ -121,7 +121,9 @@ def main():
     # 3. Proton
     if args.vpn in ("all", "proton"):
         try:
-            asyncio.run(extract_proton_async(args.outdir))
+            res = asyncio.run(extract_proton_async(args.outdir))
+            if res and res.get("node_links"):
+                all_links.extend(res["node_links"])
         except Exception as e:
             print(f"[Proton] 提取遇到错误: {e}", file=sys.stderr)
 

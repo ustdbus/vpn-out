@@ -50,7 +50,12 @@
 
 ## ⚙️ 如何在 GitHub Actions 运行
 
-1. 进入仓库的 **Actions** 标签页。
-2. 点击左侧 **`VPN 订阅自动化提取与更新`**。
-3. 点击右侧 **`Run workflow`**，选择需要提取的 VPN 类型（默认 `all` 全部提取），点击启动。
-4. 运行完成后，可在 **Summary** 查看节点统计，在 **Artifacts** 下载打包文件，同时 `sub` 分支中的订阅直链已自动同步更新。
+进入仓库的 **Actions** 标签页，左侧已将各个 VPN 服务解耦为独立工作流，可按需单独触发：
+
+1. **单独提取与更新**：
+   - **`Windscribe 订阅自动化更新`**：点击右侧 `Run workflow`，单独自动开户并刷新 Windscribe 节点与订阅。
+   - **`Opera VPN 订阅自动化更新`**：点击右侧 `Run workflow`，单独匿名探测并刷新 Opera 落地节点。
+   - **`Proton VPN 订阅自动化更新`**：需先在仓库 `Settings -> Secrets and variables -> Actions` 中配置 `PROTON_USER` 与 `PROTON_PASS`，点击 `Run workflow` 单独申请 7 天证书并拉取节点。
+2. **全量一次性提取**：
+   - **`全量 VPN 订阅自动化提取与更新 (All)`**：一键并行提取所有配置好的 VPN 服务。
+3. 运行完成后，各工作流会自动将增量结果安全合并至 `sub` 分支，更新对应的独立订阅直链及 `all-proxies.txt` 聚合列表。

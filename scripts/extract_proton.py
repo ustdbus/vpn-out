@@ -11,6 +11,7 @@ import json
 import os
 import sys
 import time
+import urllib.parse
 
 WANT = {
     "JP": "日本", "SG": "新加坡", "US": "美国", "NL": "荷兰",
@@ -92,17 +93,30 @@ async def extract_proton_async(outdir: str = "dist"):
             "pub": pub,
         })
 
+    links = []
+    for srv in picked:
+        # WireGuard 通用链接标准格式: wireguard://private_key@ip:port?publickey=pub#name
+        link = f"wireguard://{urllib.parse.quote(wg_sk)}@{srv['ip']}:{srv['port']}?publickey={urllib.parse.quote(srv['pub'])}&address=10.2.0.2/32#{urllib.parse.quote(srv['name'])}"
+        links.append(link)
+
+    links_path = os.path.join(outdir, "proton-links.txt")
+    if links:
+        with open(links_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(links) + "\n")
+
     payload = {
         "privateKey": wg_sk,
         "expiresAt": exp,
         "servers": picked,
+        "node_links": links,
+        "links": links_path,
     }
 
     acc_path = os.path.join(outdir, "proton-account.json")
     with open(acc_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
 
-    print(f"[Proton] 成功获取 {len(picked)} 个节点，保存至 {acc_path}")
+    print(f"[Proton] 成功获取 {len(picked)} 个节点，保存至 {acc_path} 与 {links_path}")
     return payload
 
 
