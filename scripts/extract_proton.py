@@ -57,6 +57,7 @@ async def extract_proton_async(outdir: str = "dist", strict: bool = False):
 
     os.makedirs(outdir, exist_ok=True)
     print("[Proton] 正在登录 Proton 账户...")
+    s = Session(appversion="linux-vpn@4.8.2", user_agent="ProtonVPN/4.8.2 (Linux; Ubuntu/24.04)")
     clean_user = user.strip()
     clean_pwd = pwd.strip()
     auth_ok = await s.async_authenticate(clean_user, clean_pwd)
