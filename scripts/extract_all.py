@@ -121,11 +121,14 @@ def main():
     # 3. Proton
     if args.vpn in ("all", "proton"):
         try:
-            res = asyncio.run(extract_proton_async(args.outdir))
+            is_strict = (args.vpn == "proton")
+            res = asyncio.run(extract_proton_async(args.outdir, strict=is_strict))
             if res and res.get("node_links"):
                 all_links.extend(res["node_links"])
         except Exception as e:
             print(f"[Proton] 提取遇到错误: {e}", file=sys.stderr)
+            if args.vpn == "proton":
+                raise
 
     # 智能增量合并写入聚合单行链接文件
     build_aggregated_links(args.outdir, all_links)

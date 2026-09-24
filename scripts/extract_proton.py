@@ -29,11 +29,19 @@ def ed25519_to_wg(raw_sk: bytes) -> str:
     return base64.b64encode(bytes(h)).decode()
 
 
-async def extract_proton_async(outdir: str = "dist"):
+async def extract_proton_async(outdir: str = "dist", strict: bool = False):
     user = os.environ.get("PROTON_USER")
     pwd = os.environ.get("PROTON_PASS")
     if not user or not pwd:
-        print("[Proton] 未配置 PROTON_USER / PROTON_PASS，跳过 Proton 节点提取。")
+        msg = (
+            "[Proton 提示] 未检测到 PROTON_USER 或 PROTON_PASS 环境变量！\n"
+            "  -> Proton 提取需要您自己的已有账号（免费账号即可）。\n"
+            "  -> 请前往 GitHub 仓库: Settings -> Secrets and variables -> Actions\n"
+            "  -> 新增两个 Secret: PROTON_USER 和 PROTON_PASS。"
+        )
+        print(msg, file=sys.stderr)
+        if strict:
+            raise RuntimeError("缺少 PROTON_USER 或 PROTON_PASS Secrets 配置，已中止。")
         return None
 
     try:
