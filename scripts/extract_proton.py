@@ -48,8 +48,11 @@ async def extract_proton_async(outdir: str = "dist", strict: bool = False):
         from proton.session import Session
         from cryptography.hazmat.primitives.asymmetric import ed25519
         from cryptography.hazmat.primitives import serialization
-    except ImportError:
-        print("[Proton] 缺少 python-proton-core 或 cryptography 库，跳过。")
+    except ImportError as e:
+        msg = f"[Proton 错误] 缺少运行依赖 ({e})，请安装: pip install git+https://github.com/ProtonVPN/python-proton-core.git cryptography"
+        print(msg, file=sys.stderr)
+        if strict:
+            raise RuntimeError(msg)
         return None
 
     os.makedirs(outdir, exist_ok=True)

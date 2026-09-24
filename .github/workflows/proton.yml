@@ -24,10 +24,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: 安装加密依赖
+      - name: 安装加密与 Proton 核心依赖
         run: |
           python3 -m pip install --upgrade pip
-          pip install cryptography
+          pip install cryptography requests bcrypt python-gnupg pyopenssl aiohttp
+          pip install git+https://github.com/ProtonVPN/python-proton-core.git
 
       - name: 执行 Proton VPN 证书申请与节点提取
         env:

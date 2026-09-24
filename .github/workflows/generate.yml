@@ -40,7 +40,8 @@ jobs:
       - name: 安装依赖
         run: |
           python3 -m pip install --upgrade pip
-          pip install cryptography
+          pip install cryptography requests bcrypt python-gnupg pyopenssl aiohttp
+          pip install git+https://github.com/ProtonVPN/python-proton-core.git
 
       - name: 执行自动化注册与订阅提取
         env:
