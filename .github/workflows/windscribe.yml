@@ -8,9 +8,6 @@ on:
         required: false
         type: boolean
         default: true
-  schedule:
-    # 每天北京时间凌晨 3:00 (UTC 19:00) 与 Opera VPN 同步自动更新
-    - cron: '0 19 * * *'
 
 permissions:
   contents: write

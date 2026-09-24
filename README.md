@@ -50,12 +50,12 @@
 
 ## ⚙️ 如何在 GitHub Actions 运行
 
-进入仓库的 **Actions** 标签页，左侧已将各个 VPN 服务解耦为独立工作流，可按需单独触发：
-
-1. **单独提取与更新**：
-   - **`Windscribe 订阅自动化更新`**：点击右侧 `Run workflow`，单独自动开户并刷新 Windscribe 节点与订阅。
-   - **`Opera VPN 订阅自动化更新`**：点击右侧 `Run workflow`，单独匿名探测并刷新 Opera 落地节点。
-   - **`Proton VPN 订阅自动化更新`**：需先在仓库 `Settings -> Secrets and variables -> Actions` 中配置 `PROTON_USER` 与 `PROTON_PASS`，点击 `Run workflow` 单独申请 7 天证书并拉取节点。
-2. **全量一次性提取**：
-   - **`全量 VPN 订阅自动化提取与更新 (All)`**：一键并行提取所有配置好的 VPN 服务。
-3. 运行完成后，各工作流会自动将增量结果安全合并至 `sub` 分支，更新对应的独立订阅直链及 `all-proxies.txt` 聚合列表。
+1. **自动定时更新（每隔 3 天凌晨 3 点）**：
+   - 仓库已配置全量工作流 **`全量 VPN 订阅自动化提取与更新 (All)`**，每隔 3 天（北京时间凌晨 03:00）自动全量运行一次，三个服务一起自动更新，聚合发布到 `sub` 分支。
+2. **手动按需单独更新（选项全部保留）**：
+   - 进入 **Actions** 标签页，左侧保留了各独立服务的 Action 入口，可随时按需单独点击 `Run workflow`：
+     - **`Windscribe 订阅自动化更新`**：单独开户并刷新 Windscribe 节点与订阅。
+     - **`Opera VPN 订阅自动化更新`**：单独探测并刷新 Opera 落地节点。
+     - **`Proton VPN 订阅自动化更新`**：单独申请证书并刷新 Proton WireGuard 节点（需配置 `PROTON_USER`/`PROTON_PASS` Secrets）。
+     - **`全量 VPN 订阅自动化提取与更新 (All)`**：随时手动全量刷新全部节点。
+3. 运行完成后，各工作流均会自动将结果同步至 `sub` 分支，更新对应的独立订阅直链及 `all-proxies.txt` 聚合列表。
