@@ -9,8 +9,8 @@ on:
         type: boolean
         default: true
   schedule:
-    # 每周一凌晨 2 点自动更新 Proton VPN 会话证书与 WireGuard 节点
-    - cron: '0 2 * * 1'
+    # 每周一北京时间凌晨 3:00 (UTC 周日 19:00) 与 Windscribe、Opera 一起同步更新
+    - cron: '0 19 * * 0'
 
 permissions:
   contents: write
@@ -71,7 +71,22 @@ jobs:
             echo "订阅内容无变动，跳过提交"
           else
             git commit -m "自动更新: Proton VPN 节点订阅 ($(date -u '+%Y-%m-%d %H:%M:%S') UTC)"
-            git push origin sub --force
+            for attempt in {1..5}; do
+              if git push origin sub; then
+                echo "成功推送到 sub 分支"
+                break
+              fi
+              echo "推送发生竞争，拉取最新内容重试 ($attempt/5)..."
+              sleep $((attempt * 3))
+              git fetch origin sub || true
+              git rebase -X ours origin/sub || true
+              if [ -d ../dist ] && [ "$(ls -A ../dist)" ]; then
+                cp -r ../dist/* ./
+              fi
+              python3 ../scripts/extract_all.py --aggregate-only --outdir .
+              git add -A
+              git commit --amend --no-edit || true
+            done
           fi
           cd ..
           rm -rf repo-sub

@@ -9,8 +9,8 @@ on:
         type: boolean
         default: true
   schedule:
-    # 每天凌晨 3:30 自动探测刷新 Opera VPN 落地节点
-    - cron: '30 3 * * *'
+    # 每天北京时间凌晨 3:00 (UTC 19:00) 与 Windscribe 同步自动更新
+    - cron: '0 19 * * *'
 
 permissions:
   contents: write
@@ -63,7 +63,22 @@ jobs:
             echo "订阅内容无变动，跳过提交"
           else
             git commit -m "自动更新: Opera VPN 节点订阅 ($(date -u '+%Y-%m-%d %H:%M:%S') UTC)"
-            git push origin sub --force
+            for attempt in {1..5}; do
+              if git push origin sub; then
+                echo "成功推送到 sub 分支"
+                break
+              fi
+              echo "推送发生竞争，拉取最新内容重试 ($attempt/5)..."
+              sleep $((attempt * 3))
+              git fetch origin sub || true
+              git rebase -X ours origin/sub || true
+              if [ -d ../dist ] && [ "$(ls -A ../dist)" ]; then
+                cp -r ../dist/* ./
+              fi
+              python3 ../scripts/extract_all.py --aggregate-only --outdir .
+              git add -A
+              git commit --amend --no-edit || true
+            done
           fi
           cd ..
           rm -rf repo-sub
