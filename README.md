@@ -8,13 +8,12 @@
 
 ## 🌟 支持的 VPN 节点类型
 
-| VPN 服务 | 注册方式 | 节点类型 | 覆盖地区 | 特点 |
+| VPN 服务 | 注册方式 | 节点类型 | 覆盖地区 | 特点与归属 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Windscribe** | Actions 自动开户 | HTTP / HTTPS 代理 | 13 个国家/地区（香港、美国、加拿大、法国、德国、英国、荷兰、挪威、瑞士、罗马尼亚等） | 官方免费 2GB/月，60+ 落地服务器 |
-| **Opera VPN** | 匿名协议自动开户 | HTTPS 代理 | 亚洲、欧洲、美洲 | 不限流量，匿名开户 |
-| **Proton VPN** | 凭证自动提取 | WireGuard | 日本、新加坡、美国、荷兰等 | 免费机房节点 |
-| **Hide.me (独立源)** | 扩展协议免密提取 | SOCKS5 代理 | 瑞士、荷兰、美国等 | 官方免费免密 SOCKS5，独立更新 |
-
+| **Windscribe** | Actions 自动开户 | HTTP / HTTPS 代理 | 13 个国家/地区（香港、美国、加拿大、法国、德国、英国、荷兰、挪威、瑞士、罗马尼亚等） | 官方免费 2GB/月，60+ 落地服务器（全量聚合源） |
+| **Opera VPN** | 匿名协议自动开户 | HTTPS 代理 | 亚洲、欧洲、美洲 | 不限流量，匿名开户（全量聚合源） |
+| **Proton VPN** | 凭证自动提取 | WireGuard | 日本、新加坡、美国、荷兰等 | 免费机房节点，WireGuard 高性能（全量聚合源） |
+| **Hide.me** | 扩展协议免密提取 | SOCKS5 代理 | 瑞士、荷兰、美国等 | **独立订阅源**，免注册免密码，内置连通性健康探测与动态端口跟踪（不混入全量源） |
 
 ---
 
@@ -22,39 +21,45 @@
 
 工作流执行完成后，会自动将最新的可用节点发布到本仓库的 `sub` 分支，您可以直接使用 RAW 直链作为**永远在线、自动更新的订阅源**：
 
-- **单行代理节点聚合列表 (sout 推荐首选)**:
-  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/all-proxies.txt`
-- **Windscribe 独立节点列表 (HTTP/HTTPS 代理)**:
+### 1. 全量聚合订阅 (3-in-1)
+- **单行代理节点聚合列表 (sout 推荐首选)**:  
+  `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/all-proxies.txt`  
+  *(整合了 Windscribe、Opera、Proton 的全部可用节点)*
+
+### 2. 各服务独立订阅链接
+- **Windscribe 独立节点列表 (HTTP/HTTPS 代理)**:  
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/windscribe-links.txt`
-- **Opera 独立节点列表 (HTTPS 代理)**:
+- **Opera 独立节点列表 (HTTPS 代理)**:  
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/opera-links.txt`
-- **Proton 独立节点列表 (WireGuard)**:
+- **Proton 独立节点列表 (WireGuard)**:  
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/proton-links.txt`
-- **Hide.me 独立节点列表 (SOCKS5 代理，独立源未并入 all)**:
+- **Hide.me 独立节点列表 (SOCKS5 代理)**:  
   `https://raw.githubusercontent.com/ustdbus/vpn-out/sub/hideme-links.txt`
 
-> **提示**：Cloudflare WARP 推荐直接在 **sout** 面板中「申请并创建 WARP 出口」，由本机直接调用 Cloudflare 官方 API 注册独立专属账户，无需再通过外部订阅导入。
-
+> **说明**：
+> - **Hide.me** 作为独立专属订阅源维护，具备独立的动态轮换周期，**未合并入 `all-proxies.txt`**，可按需单独订阅。
+> - Cloudflare WARP 推荐直接在 **sout** 面板中「申请并创建 WARP 出口」，由本机直接调用 Cloudflare 官方 API 注册独立专属账户，无需再通过外部订阅导入。
 
 ---
 
 ## 📖 在 sout 面板中使用
 
 1. 打开 **sout** 控制面板。
-2. 方式 A（一键批量添加）：
+2. **方式 A（一键批量添加）**：
    - 点击 **「添加自定义出口」**。
    - 在弹出的窗口中，将从上面链接复制的节点链接（或直接输入订阅链接）粘贴进去，点击 **「批量解析并导入」** 即可一键加入出口隧道池！
-3. 方式 B（自动定时订阅）：
+3. **方式 B（自动定时订阅）**：
    - 点击 **「SOCKS5 订阅源」**。
-   - 添加源名称（如 `VPN-OUT 订阅源`）以及上面的 `all-proxies.txt` 链接。
+   - 添加源名称（如 `VPN-OUT 聚合源` 或 `Hide.me 独立源`）以及对应的直链链接。
    - sout 会自动同步节点并按家宽/机房进行识别，之后在下方节点列表中绑定分流即可。
 
 ---
 
 ## ⚙️ 如何在 GitHub Actions 运行
 
-1. **自动定时更新（每隔 3 天凌晨 3 点）**：
-   - 仓库已配置全量工作流 **`全量 VPN 订阅自动化提取与更新 (All)`**，每隔 3 天（北京时间凌晨 03:00）自动全量运行一次，三个服务一起自动更新，聚合发布到 `sub` 分支。
+1. **自动定时更新**：
+   - **全量工作流 (`全量 VPN 订阅自动化提取与更新 (All)`)**：每隔 3 天（北京时间凌晨 03:00）全量执行一次，聚合发布至 `sub` 分支。
+   - **Hide.me 专属工作流 (`Hide.me 免费代理订阅自动化更新`)**：每天（北京时间凌晨 04:00）独立执行一次，跟踪最新可用动态端口并独立同步至 `sub` 分支。
 2. **手动按需单独更新（选项全部保留）**：
    - 进入 **Actions** 标签页，左侧保留了各独立服务的 Action 入口，可随时按需单独点击 `Run workflow`：
      - **`Windscribe 订阅自动化更新`**：单独开户并刷新 Windscribe 节点与订阅。
@@ -62,4 +67,26 @@
      - **`Proton VPN 订阅自动化更新`**：单独申请证书并刷新 Proton WireGuard 节点（需配置 `PROTON_USER`/`PROTON_PASS` Secrets）。
      - **`Hide.me 免费代理订阅自动化更新`**：单独探测并刷新 Hide.me 免密 SOCKS5 代理（独立维护，不影响聚合列表）。
      - **`全量 VPN 订阅自动化提取与更新 (All)`**：随时手动全量刷新全部节点。
-3. 运行完成后，各工作流均会自动将结果同步至 `sub` 分支，更新对应的独立订阅直链及 `all-proxies.txt` 聚合列表。
+
+---
+
+## 💻 本地调试运行
+
+如果需要在本地机器直接提取并导出最新节点，可在本地 Python 3.10+ 环境下运行：
+
+```bash
+# 单独提取 Hide.me 节点 (内置并发可用性探测)
+python scripts/extract_hideme.py dist
+
+# 单独提取 Windscribe 节点
+python scripts/extract_windscribe.py dist
+
+# 单独提取 Opera 节点
+python scripts/extract_opera.py dist
+
+# 单独提取 Proton 节点 (需要 PROTON_USER 和 PROTON_PASS 环境变量)
+python scripts/extract_proton.py dist
+
+# 全量提取并生成聚合 all-proxies.txt (不含 Hide.me)
+python scripts/extract_all.py --outdir dist
+```
