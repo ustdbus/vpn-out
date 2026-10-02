@@ -2,24 +2,24 @@
   "service": "hide.me",
   "type": "socks5",
   "server_count": 4,
-  "updatedAt": "2026-10-01T23:33:08Z",
+  "updatedAt": "2026-10-02T23:24:27Z",
   "servers": [
     {
       "name": "USA",
       "host": "107.150.41.226",
-      "port": 15827,
+      "port": 22735,
       "ttl": 60
     },
     {
       "name": "Netherlands",
       "host": "213.111.146.36",
-      "port": 15103,
+      "port": 25635,
       "ttl": 60
     },
     {
       "name": "Switzerland",
       "host": "185.195.71.218",
-      "port": 40057,
+      "port": 41503,
       "ttl": 60
     },
     {
@@ -29,9 +29,9 @@
     }
   ],
   "node_links": [
-    "socks5://107.150.41.226:15827#HideMe-%E7%BE%8E%E5%9B%BD",
-    "socks5://213.111.146.36:15103#HideMe-%E8%8D%B7%E5%85%B0",
-    "socks5://185.195.71.218:40057#HideMe-%E7%91%9E%E5%A3%AB",
+    "socks5://107.150.41.226:22735#HideMe-%E7%BE%8E%E5%9B%BD",
+    "socks5://213.111.146.36:25635#HideMe-%E8%8D%B7%E5%85%B0",
+    "socks5://185.195.71.218:41503#HideMe-%E7%91%9E%E5%A3%AB",
     "socks5://213.111.146.36:18080#HideMe-%E8%8D%B7%E5%85%B02"
   ]
 }
