@@ -1,74 +1,74 @@
 {
-  "username": "E028EB69C03053FCF72FB43DE3B1B17AD52AB722",
-  "password": "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJmbUlBNGFMVThoc1I4MzktaHplSzhUNmR4dUMyYk5sYWVrYXl1c1FWQkQ0IiwieSI6ImxnSDJBQVdoZEliMW5ZNWZUTkRPSzBObGdZZjBRRU85SWVyV2wtZXJyZmMifX0.nvJ09o3PuPyIyPk_ZuuZNWer65ZBBvxm6OtcLyZ6w7ct9KrjI6Vn_A.G2C99ra8T6Rvl_Rr.oggAQybA1xIIpUc2PeJsfx3xUjW52Qe7boKsN5lV2cr7kG3z4eA9eSgXcu_oZoxQnNzJWV6-5k2keabI9Ls5giMiFAiucvRzqpqRct9m5V_RZPy_svoZUG2Dzgxn3jgjUFWxTvlgJ6auT5lev33jRRx4kjZFw9B34liR_a7HzatcQlrSy3oGpM1qdKE10nxbS_hbtyk729yKbwLh9F6jBoCXIx6VUp0Li8D0PsM0-wgBSqh1ESFm7nANHC1KUuY0No4QcW6p0ANeIPTTt1OSntuhjfzBASv5dTkjbaVO_HHPqepyGbXA8AI_Tr9olnaWXmrEtzGCyiIfL2Oe3v2Y8UQpobJ5QFt5PSQY5ZOpdeeifbrCZ_w9jLUdrU2jKKQeGQ.-rV26pyWacaIM4ERm698nw",
+  "username": "F4328222D942BBABF50E071ACFF34D5A174EC40D",
+  "password": "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImN0eSI6IkpXVCIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTI1NiIsIngiOiJWNkhIckcwSnRuMWtPU3dWcUdOdjVoM1U1SnJmRzNkV2U2SklON1h4anpJIiwieSI6ImpQVlRzMWlVVU5KaURuYU1JRWY1SnBocXVmcnZneDNPWEg0REJ1eXJfUWMifX0.1LLuJD-9lNg2OcWGflk9eE1xgSCiiaI3j9Cmhw2LQeKlxgCXY-iZyw.SXoz1_3ksGDmeeWo.WJwXuPsvUzpD6M3QRyFEioIjdgAf4R7OOVSzxtq-cMTQS8BOF4GXAFa0ghGHxFSgh4wmt3goTMxlWYv8zjP-afzCyDsjpDxK2UCXxrLLpfjZjAGpT17zXh4952UZRL6AB34gWR4RRFRANEsODe412EYgEiO60ee9lutETr1_zJLeFKIlkBD2yDBaCcIqHswGD3xG4bGawdHaN0bkwsVfDj_w30QQftZqLmLMHPujrJkAahYECU9GGqIzpAdUxVhjRx1jn6qMCrYGeVUNbYP-OWIz7hi0hmGD3Jp9LppCHaKhTU48BU3FkFv-HYVExMHQOYYbS3gofOvDU1bgPn9uvofzQKJzBCu7CQ3drdbUjiiAv3KcPUCIwZ5Gd-PFglUMCw.cCSRs0OT0QZ-7EcV_b3u-g",
   "landings": [
     {
       "tag": "Opera-亚洲1",
       "loc": "亚洲",
-      "ip": "77.111.246.48",
+      "ip": "77.111.246.50",
       "port": 443,
       "host": "as0.sec-tunnel.com"
     },
     {
       "tag": "Opera-亚洲2",
       "loc": "亚洲",
-      "ip": "77.111.246.40",
+      "ip": "77.111.246.27",
       "port": 443,
       "host": "as1.sec-tunnel.com"
     },
     {
       "tag": "Opera-亚洲3",
       "loc": "亚洲",
-      "ip": "77.111.246.64",
+      "ip": "77.111.246.14",
       "port": 443,
       "host": "as2.sec-tunnel.com"
     },
     {
       "tag": "Opera-亚洲4",
       "loc": "亚洲",
-      "ip": "77.111.246.14",
+      "ip": "77.111.246.60",
       "port": 443,
       "host": "as3.sec-tunnel.com"
     },
     {
       "tag": "Opera-欧洲1",
       "loc": "欧洲",
-      "ip": "77.111.246.40",
+      "ip": "77.111.246.27",
       "port": 443,
       "host": "eu0.sec-tunnel.com"
     },
     {
       "tag": "Opera-欧洲2",
       "loc": "欧洲",
-      "ip": "77.111.246.50",
+      "ip": "77.111.246.25",
       "port": 443,
       "host": "eu1.sec-tunnel.com"
     },
     {
       "tag": "Opera-欧洲3",
       "loc": "欧洲",
-      "ip": "77.111.246.60",
+      "ip": "77.111.246.62",
       "port": 443,
       "host": "eu2.sec-tunnel.com"
     },
     {
       "tag": "Opera-欧洲4",
       "loc": "欧洲",
-      "ip": "77.111.246.64",
+      "ip": "77.111.246.63",
       "port": 443,
       "host": "eu3.sec-tunnel.com"
     },
     {
       "tag": "Opera-美洲1",
       "loc": "美洲",
-      "ip": "77.111.246.47",
+      "ip": "77.111.246.27",
       "port": 443,
       "host": "am0.sec-tunnel.com"
     },
     {
       "tag": "Opera-美洲2",
       "loc": "美洲",
-      "ip": "77.111.246.10",
+      "ip": "77.111.246.40",
       "port": 443,
       "host": "am1.sec-tunnel.com"
     },
@@ -82,7 +82,7 @@
     {
       "tag": "Opera-美洲4",
       "loc": "美洲",
-      "ip": "77.111.246.126",
+      "ip": "77.111.246.14",
       "port": 443,
       "host": "am3.sec-tunnel.com"
     }
